@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUT Team Builder</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body class="bg-gray-800 text-white">
+    <header class="header">
+        <h1 class="font-bold text-xl"> FUT TEAM BUILDER</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#" class="active">Team</a></li>
+                <li><a href="#sub">Substitutions</a></li>
+                <li><a href="#footer">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container mx-auto py-10">
+        <div class="flex justify-center mb-4 cursor-pointer p-2 bg-green-500 text-white rounded hover:bg-green-600" onclick="openNewPlayerModal()"> Add New Player</div>
+    </div>
+
+    <div class="cards-container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+            <div class="col-span-3 flex justify-around">
+                <div id="lw" class="card flex items-center justify-center" onclick="openModal('lw')">
+                    <div class="player-info">
+                        <p>LW</p>
+                    </div>
+                </div>
+                <div id="st" class="card flex items-center justify-center" onclick="openModal('st')">
+                    <div class="player-info">
+                        <p>ST</p>
+                    </div>
+                </div>
+                <div id="rw" class="card flex items-center justify-center" onclick="openModal('rw')">
+                    <div class="player-info">
+                        <p>RW</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-span-3 flex justify-around">
+                <div id="cm1" class="card flex items-center justify-center" onclick="openModal('cm1')">
+                    <div class="player-info">
+                        <p>CM</p>
+                    </div>
+                </div>
+                <div id="cam" class="card flex items-center justify-center" onclick="openModal('cam')">
+                    <div class="player-info">
+                        <p>CAM</p>
+                    </div>
+                </div>
+                <div id="cm2" class="card flex items-center justify-center" onclick="openModal('cm2')">
+                    <div class="player-info">
+                        <p>CM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-span-3 flex justify-around">
+                <div id="lb" class="card flex items-center justify-center" onclick="openModal('lb')">
+                    <div class="player-info">
+                        <p>LB</p>
+                    </div>
+                </div>
+                <div id="cb1" class="card flex items-center justify-center" onclick="openModal('cb1')">
+                    <div class="player-info">
+                        <p>CB</p>
+                    </div>
+                </div>
+                <div id="cb2" class="card flex items-center justify-center" onclick="openModal('cb2')">
+                    <div class="player-info">
+                        <p>CB</p>
+                    </div>
+                </div>
+                <div id="rb" class="card flex items-center justify-center" onclick="openModal('rb')">
+                    <div class="player-info">
+                        <p>RB</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-span-3 flex justify-center mt-4">
+                <div id="gk" class="card flex items-center justify-center" onclick="openModal('gk')">
+                    <div class="player-info">
+                        <p>GK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal pour Player Selection -->
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Select a Player</h2>
+            <select id="playerSelect" class="w-full p-2 mt-2 border border-gray-400">
+                <option value="" disabled selected>Select a player</option>
+            </select>
+            <button class="mt-4 p-2 bg-blue-500 text-white" onclick="addPlayer()">Add Player</button>
+            <button class="mt-4 p-2 bg-red-500 text-white" onclick="deletePlayer()">Delete Player</button>
+        </div>
+    </div>
+
+    <!-- The Modal of New Player -->
+    <div id="newPlayerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeNewPlayerModal()">&times;</span>
+            <h2>Add New Player</h2>
+            <form id="newPlayerForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="image">Image URL:</label>
+                <input type="text" id="image" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="position">Position:</label>
+                <select id="position" class="w-full p-2 mt-2 border border-gray-400" required>
+                    <option value="" disabled selected>Select a position</option>
+                    <option value="lw">LW</option>
+                    <option value="st">ST</option>
+                    <option value="rw">RW</option>
+                    <option value="cm1">CM</option>
+                    <option value="cam">CAM</option>
+                    <option value="cm2">CM</option>
+                    <option value="lb">LB</option>
+                    <option value="cb1">CB</option>
+                    <option value="cb2">CB</option>
+                    <option value="rb">RB</option>
+                    <option value="gk">GK</option>
+                </select>
+                
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="club">Club:</label>
+                <input type="text" id="club" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="rating">Rating:</label>
+                <input type="number" id="rating" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="pace">Pace:</label>
+                <input type="number" id="pace" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="shooting">Shooting:</label>
+                <input type="number" id="shooting" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="passing">Passing:</label>
+                <input type="number" id="passing" class="w-full p-2 mt-2 border border>
+                <label for="dribbling">Dribbling:</label>
+                <input type="number" id="dribbling" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="defending">Defending:</label>
+                <input type="number" id="defending" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <label for="physical">Physical:</label>
+                <input type="number" id="physical" class="w-full p-2 mt-2 border border-gray-400" required>
+                
+                <button type="button" class="mt-4 p-2 bg-blue-500 text-white" onclick="addNewPlayer()">Add Player</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Subs -->
+    <div class="container mx-auto py-10" id="sub">
+        <h2 class="text-center text-2xl mb-6">Substitutions</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            <div id="sub1" class="card flex items-center justify-center" onclick="openModal('sub1')">
+                <div class="player-info">
+                    <p>SUB 1</p>
+                </div>
+            </div>
+            <div id="sub2" class="card flex items-center justify-center" onclick="openModal('sub2')">
+                <div class="player-info">
+                    <p>SUB 2</p>
+                </div>
+            </div>
+            <div id="sub3" class="card flex items-center justify-center" onclick="openModal('sub3')">
+                <div class="player-info">
+                    <p>SUB 3</p>
+                </div>
+            </div>
+            <div id="sub4" class="card flex items-center justify-center" onclick="openModal('sub4')">
+                <div class="player-info">
+                    <p>SUB 4</p>
+                </div>
+            </div>
+            <div id="sub5" class="card flex items-center justify-center" onclick="openModal('sub5')">
+                <div class="player-info">
+                    <p>SUB 5</p>
+                </div>
+            </div>
+            <div id="sub6" class="card flex items-center justify-center" onclick="openModal('sub6')">
+                <div class="player-info">
+                    <p>SUB 6</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-gray-900 text-center py-6" id="footer">
+        <div class="flex flex-row justify-center space-x-6 items-center space-y-4 space-y-0 mb-4">
+            <a href="#" class="text-orange-500 text-2xl">
+                <img src="src/images/twitter (1).png" alt="icon1" class="w-6 h-6 mt-4">
+            </a>
+            <a href="#" class="text-orange-500 text-2xl">
+                <img src="src/images/facebook (1).png" alt="icon2" class="w-6 h-6">
+            </a>
+            <a href="#" class="text-orange-500 text-2xl">
+                <img src="src/images/instagram.png" alt="icon3" class="w-6 h-6">
+            </a>
+            <a href="#" class="text-orange-500 text-2xl">
+                <img src="src/images/mail.png" alt="icon4" class="w-6 h-6">
+            </a>
+        </div>
+        <p class="text-gray-500">Copyright ©2024 All rights reserved</p>
+    </footer>
+    <script src="src/script.js"></script>
+</body>
+</html>
